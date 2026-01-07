@@ -17,24 +17,22 @@ func getLinesChannel(f io.ReadCloser) <-chan string {
 	go func() {
 		for {
 			isEOF, err := f.Read(a)
-			if err != nil {
-				fmt.Println(err)
-			}
-
-			if isEOF == 0 {
-				strChan <- "EOF"
-				close(strChan)
+			if isEOF == 0 || err != nil {
+				if line != "" {
+					strChan <- line
+				}
 				return
 			}
 
 			stringedA := string(a)
 
-			if strings.Contains(stringedA, "\n") {
-				str := strings.Split(stringedA, "\n")
+			if strings.Contains(stringedA, "\r\n") {
+				str := strings.Split(stringedA, "\r\n")
 				line = line + strings.Join(str[:1], "")
 				strChan <- line
 
 				line = ""
+
 				line = line + strings.Join(str[1:], "")
 				continue
 			}
@@ -60,13 +58,13 @@ func main() {
 			log.Println(err)
 		}
 
-		fmt.Println("connection accepted!")
-
-		for s := range getLinesChannel(conn) {
-			if s == "EOF" {
-				fmt.Println("connection closed!")
+		go func() {
+			defer conn.Close()
+			for s := range getLinesChannel(conn) {
+				fmt.Println(s)
 			}
-			fmt.Println(s)
-		}
+
+			fmt.Println("connection closed!")
+		}()
 	}
 }
