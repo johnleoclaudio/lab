@@ -6,15 +6,33 @@ This repository is my public learning journal where I document everything from h
 
 ## 📖 What's Inside
 
+### 💻 Programming
+Language-specific notes, patterns, and learning materials
+- **[Go/Golang](./programming/golang/)** - HTTP handling, context, error management, database patterns
+- **[Python](./programming/python/)** - Modern backend development with FastAPI, async/await, SQLAlchemy
+
+### 🚀 Projects
+Hands-on implementations and code experiments
+- **[Go Projects](./projects/go/)** - Concurrency examples, HTTP servers, Kafka demos
+- **[Code Challenges](./projects/code-challenges/)** - Practice problems and solutions in Go and TypeScript
+
+### 🏗️ Infrastructure  
+Server setup, orchestration, and deployment guides
+- **[VPS Setup](./infrastructure/vps/)** - First-time VPS configuration with security best practices
+- **[Kubernetes](./infrastructure/k8s/)** - Container orchestration journey from local to production
+- **[Docker](./infrastructure/docker/)** - Containerization basics and configurations
+- **[Networking](./infrastructure/networking/)** - Network fundamentals and troubleshooting
+
+### 📚 Topics
+Cross-cutting technical concepts and best practices
+- **[Security](./topics/security/)** - Hashing, encryption, and security patterns
+- **[System Design](./topics/system-design/)** - Scalability and architecture principles
+- **[Scalability](./topics/scalability/)** - Performance and scaling strategies
+- **[JWT](./topics/jwt/)** - Authentication and authorization patterns
+- **[Hosting](./topics/hosting/)** - Deployment workflows and domain management
+
 ### 🖥️ Hardware
 - **[HHKB Professional Hybrid Type-S](./hardware/hhkb/)** - Battery logs, troubleshooting, and Steam Deck compatibility notes
-
-### 🚀 Infrastructure  
-- **[VPS Setup Guide](./infrastructure/vps/)** - First-time VPS configuration with security best practices
-- **[Kubernetes Learning](./infrastructure/k8s/)** - Container orchestration journey from local to production
-
-### 🔬 Experiments
-*Coming soon - various tech experiments and explorations*
 
 ## 💡 Philosophy
 

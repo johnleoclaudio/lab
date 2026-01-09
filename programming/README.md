@@ -1,0 +1,33 @@
+# Programming 💻
+
+Language-specific notes, patterns, reference materials, and structured learning paths.
+
+## Languages
+
+### [Go/Golang](./golang/)
+Reference notes covering:
+- HTTP handling and REST APIs
+- Context management
+- Error handling patterns
+- Database interactions
+- Request ID tracking
+- JSON encoding/decoding
+- Response enveloping
+- Field tags (omitzero vs omitempty)
+
+### [Python](./python/)
+Modern backend development crash course:
+1. **Python Essentials** - Core syntax, data structures, type hints
+2. **Async/Concurrency** - async/await fundamentals and patterns
+3. **FastAPI** - Modern API development with Pydantic V2
+4. **Database/SQLAlchemy** - Async ORM patterns and migrations
+5. **Testing & Tooling** - pytest, uv, Ruff, Docker
+6. **Production Ready** - Project structure, logging, deployment
+
+## Focus
+
+These notes emphasize:
+- **Quick reference** - Fast lookups for common patterns
+- **Production patterns** - Real-world best practices
+- **Modern tooling** - 2025 industry standards
+- **Practical examples** - Code snippets over theory
