@@ -12,7 +12,17 @@ func doWork(id int) {
 }
 
 func main() {
-	for i := 0; i < 5; i++ {
-		doWork(i)
+	t := time.NewTimer(500 * time.Millisecond)
+	for {
+		select {
+		case _, ok := <-t.C:
+			if !ok {
+				return
+			}
+			fmt.Println("time out!")
+			return
+		default:
+			fmt.Println("waiting...")
+		}
 	}
 }
