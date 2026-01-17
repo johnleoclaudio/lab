@@ -15,15 +15,6 @@ Reference notes covering:
 - Response enveloping
 - Field tags (omitzero vs omitempty)
 
-### [Python](./python/)
-Modern backend development crash course:
-1. **Python Essentials** - Core syntax, data structures, type hints
-2. **Async/Concurrency** - async/await fundamentals and patterns
-3. **FastAPI** - Modern API development with Pydantic V2
-4. **Database/SQLAlchemy** - Async ORM patterns and migrations
-5. **Testing & Tooling** - pytest, uv, Ruff, Docker
-6. **Production Ready** - Project structure, logging, deployment
-
 ## Focus
 
 These notes emphasize:
