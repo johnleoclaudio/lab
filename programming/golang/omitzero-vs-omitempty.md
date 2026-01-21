@@ -1,4 +1,8 @@
 # omitzero vs omitempty
+When transforming Go structs to JSON, choosing which field to include is important to make sure that the output is lean, clean, and does make sense. There two commonly used struct tags to achieve this: `omitempty` and `omitzero`.
+
+For a seasoned Go developer, `omitempty` is a more familiar term. However, with the introduction of Go 1.24, `omitzero` has been added to provide a more explicit way to omit fields with zero values, including structs.
+
 - omitzero is newer addition in Go 1.24 
 - omitzero is clear about the intent. Remove field with zero-value.
 - omitempty will not omit structs even if all the fields are zero-value.
