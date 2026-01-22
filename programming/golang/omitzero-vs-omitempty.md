@@ -1,11 +1,22 @@
 # omitzero vs omitempty
-When transforming Go structs to JSON, choosing which field to include is important to make sure that the output is lean, clean, and does make sense. There two commonly used struct tags to achieve this: `omitempty` and `omitzero`.
 
-For a seasoned Go developer, `omitempty` is a more familiar term. However, with the introduction of Go 1.24, `omitzero` has been added to provide a more explicit way to omit fields with zero values, including structs.
+**TL;DR** Go 1.24 introduced `omitzero` - a better alternative to `omitempty` for cleaner JSON output. It handles structs, time.Time, and slices more intuitively. Use it for new projects!
 
-- omitzero is newer addition in Go 1.24 
-- omitzero is clear about the intent. Remove field with zero-value.
-- omitempty will not omit structs even if all the fields are zero-value.
+When transforming Go structs to JSON, choosing which field to include is important to make sure that the output is lean, tidy, and make sense. There are two commonly used `structs` tags to achieve this: `omitempty` and `omitzero`.
+
+For a seasoned Go developer, `omitempty` is a more familiar term when dealing with omitting fields. However, with the introduction of Go 1.24, `omitzero` has been added to the language as an alternative to control your JSON output. 
+
+**Note:** You'll need Go 1.24 or later to use `omitzero`.
+
+It's important to understand the differences between these two tags to make an informed decision on which one to use in your codebase. 
+
+### omitempty
+
+Let's talk about `omitempty` first. Key features of `omitempty` are:
+
+- `omitempty` will omit the field if it has a zero-value.
+- Zero-values include: `0` for numbers, `""` for strings, `false` for booleans, `nil` for pointers, slices, maps, interfaces, and channels
+- `omitempty` will not omit `structs` even if all the fields are zero-value.
 
 Consider this example. 
 ```go
@@ -21,7 +32,7 @@ Consider this example.
     ID         uuid.UUID `json:"id"`
     FirstName  string    `json:"first_name"`
     LastName   string    `json:"last_name"`
-    MiddleName string    `json:"middle_name,omitzero"`
+    MiddleName string    `json:"middle_name,omitempty"`
     Address    Address   `json:"address,omitempty"` // <-- embedded Address struct with omitempty directive
     CreatedAt  time.Time `json:"created_at"`
     UpdatedAt  time.Time `json:"updated_at"`
@@ -55,7 +66,12 @@ Here's the result:
 }
 ```
 
-If `omitzero` was used instead, we'll get a cleaner result:
+### omitzero
+
+Now, let's look at `omitzero`. First off, the name, it clearly communicates its intended purpose: to omit fields that have zero-values.
+
+Comparing the example earlier, we will only change the struct tag for the `Address` field from `omitempty` to `omitzero`.
+
 ```go
   type User struct {
     Address    Address   `json:"address,omitzero"`
@@ -71,8 +87,30 @@ If `omitzero` was used instead, we'll get a cleaner result:
   "updated_at": "2026-01-04T16:37:54.072378+08:00"
 }
 ```
-- Other difference includes:
-  - omitempty will not omit time.Time
-  - omitempty will not omit arrays
-  - omitempty will not omit empty slices and maps
-- 
+
+Not only the payload is leaner, but it also makes more sense. If the `Address` field is not provided, it should not appear in the JSON output at all.
+
+
+Here's what `omitzero` handles better than `omitempty`:
+- omitempty will not omit time.Time
+- omitempty will not omit arrays
+- omitempty will not omit empty slices and maps
+
+### Key Takeaways
+
+**For new code, prefer `omitzero`** - it provides more intuitive behavior and cleaner JSON output:
+
+- Omits all zero-value fields consistently, including structs, time.Time, slices, and empty collections
+- The name clearly communicates its purpose
+- Results in leaner, more meaningful JSON payloads
+
+**When to use `omitempty`**:
+- Working with legacy codebases where changing behavior might break clients
+- You specifically need to preserve empty structs or time.Time zero values in JSON output
+- Maintaining backward compatibility with existing APIs
+
+`omitzero` represents Go's evolution toward more predictable JSON marshaling behavior. For greenfield projects, it's the better default choice.
+
+### Further Reading
+- [Go 1.24 Release Notes](https://go.dev/doc/go1.24#json)
+- [Go JSON Package Documentation](https://pkg.go.dev/encoding/json)
